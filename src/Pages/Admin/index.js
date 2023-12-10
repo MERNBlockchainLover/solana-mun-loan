@@ -221,7 +221,7 @@ export default function Admin() {
         // --- getting collection image ---
         diagCtx.showLoading("Initializing setting variables...");
         {
-            const connection = new Connection(clusterApiUrl('devnet'));
+            const connection = new Connection("https://tiniest-warmhearted-season.solana-mainnet.quiknode.pro/e93197fd4a798a275aef90af5802e6cfd91bc21e/");
             const metaplex = new Metaplex(connection)
             .use(walletAdapterIdentity(wallet))
             .use(bundlrStorage());

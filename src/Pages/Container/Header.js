@@ -23,9 +23,9 @@ import {
 } from "@solana/spl-token";
 import { deriveSCAccountPDA, deriveConfigurationAccountPDA, derivePoolAccountPDA, deriveNFTAccountPDA, deriveOrderAccountPDA } from '../../Utility/ts/helper';
 
-const MUN_PROGRAM_ID = new anchor.web3.PublicKey(
-    "HTHZhsB4gmyTbNnWGU7kC3hU1JP79YzedQuyUwfqRijy"
-);
+// const MUN_PROGRAM_ID = new anchor.web3.PublicKey(
+//     "HTHZhsB4gmyTbNnWGU7kC3hU1JP79YzedQuyUwfqRijy"
+// );
 
 function NavItem({active, title, url}) {
     const navigate = useNavigate();
@@ -80,39 +80,39 @@ export default function Header() {
     const { connection } = useConnection();
 
     const initialize = async () => {        
-        const provider = new anchor.AnchorProvider(connection, wallet, {});
-        anchor.setProvider(provider);
+        // const provider = new anchor.AnchorProvider(connection, wallet, {});
+        // anchor.setProvider(provider);
 
-        const program = new Program(
-            IDL,
-            MUN_PROGRAM_ID,
-            provider
-        );
+        // const program = new Program(
+        //     IDL,
+        //     MUN_PROGRAM_ID,
+        //     provider
+        // );
 
-        try {
-            const [configurationPubKey] = await deriveConfigurationAccountPDA(
-                NATIVE_MINT,
-                program.programId
-            );
+        // try {
+        //     const [configurationPubKey] = await deriveConfigurationAccountPDA(
+        //         NATIVE_MINT,
+        //         program.programId
+        //     );
 
-            console.log(configurationPubKey.toBase58());
+        //     console.log(configurationPubKey.toBase58());
 
-            const configuration = await program.account.configuration.fetch(
-                configurationPubKey
-            );
+        //     const configuration = await program.account.configuration.fetch(
+        //         configurationPubKey
+        //     );
 
-            console.log(configuration.withdrawTaxVault.toBase58());
-            console.log(provider.wallet.publicKey.toBase58());
+        //     console.log(configuration.withdrawTaxVault.toBase58());
+        //     console.log(provider.wallet.publicKey.toBase58());
 
 
-            if(configuration.withdrawTaxVault.toBase58() === provider.wallet.publicKey.toBase58()){
-                diagCtx.setIsAdmin(true);
-            }
-        } catch(e){
-            diagCtx.showError(e.message);
-            diagCtx.hideLoading();
-            return;
-        }
+        //     if(configuration.withdrawTaxVault.toBase58() === provider.wallet.publicKey.toBase58()){
+        //         diagCtx.setIsAdmin(true);
+        //     }
+        // } catch(e){
+        //     diagCtx.showError(e.message);
+        //     diagCtx.hideLoading();
+        //     return;
+        // }
     }
 
     useEffect(() => {

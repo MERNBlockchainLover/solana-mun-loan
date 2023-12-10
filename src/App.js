@@ -33,8 +33,8 @@ import { WalletModalProvider } from '@solana/wallet-adapter-react-ui';
 require('@solana/wallet-adapter-react-ui/styles.css');
 
 export default function App() {
-  const solNetwork = WalletAdapterNetwork.Devnet;
-  const endpoint = useMemo(() => clusterApiUrl(solNetwork), [solNetwork]);
+  const solNetwork = WalletAdapterNetwork.Mainnet;
+  const endpoint = useMemo(() => "https://tiniest-warmhearted-season.solana-mainnet.quiknode.pro/e93197fd4a798a275aef90af5802e6cfd91bc21e/", [solNetwork]);
   // initialise all the wallets you want to use
   const wallets = useMemo(
     () => [

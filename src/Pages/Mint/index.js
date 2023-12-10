@@ -111,14 +111,14 @@ export default function Mint() {
     }, []);
 
     const initialize = async () => {
-      const connection = new Connection(clusterApiUrl('devnet'));
+      const connection = new Connection("https://tiniest-warmhearted-season.solana-mainnet.quiknode.pro/e93197fd4a798a275aef90af5802e6cfd91bc21e/");
       const metaplex = new Metaplex(connection)
       .use(walletAdapterIdentity(wallet))
       .use(bundlrStorage());
 
       const candyMachine = await metaplex
         .candyMachines()//HCCyuPHQ4c7SqR9MfW4McALKDc4RbeRVpqT8spJUCcrQ
-        .findByAddress({ address: new PublicKey("7tPiBBcanvvVo7xFLQYvThKNuXSuGNiKiRxGT9X4fGQm") });
+        .findByAddress({ address: new PublicKey("D9hwf56eyPCNNXBAG8JSczD66BGW9eVm8EhX92CMZLbo") });
  
 
         setMintedCount(candyMachine.itemsMinted.toString(10));
@@ -149,7 +149,7 @@ export default function Mint() {
         return;
       }
 
-      const connection = new Connection(clusterApiUrl('devnet'), 'confirmed');
+      const connection = new Connection("https://tiniest-warmhearted-season.solana-mainnet.quiknode.pro/e93197fd4a798a275aef90af5802e6cfd91bc21e/", 'confirmed');
       const metaplex = new Metaplex(connection)
       .use(walletAdapterIdentity(wallet))
       .use(bundlrStorage());
@@ -272,7 +272,7 @@ export default function Mint() {
     }
 
     const createCandyMachine = async () => {
-      const connection = new Connection(clusterApiUrl('devnet'));
+      const connection = new Connection("https://tiniest-warmhearted-season.solana-mainnet.quiknode.pro/e93197fd4a798a275aef90af5802e6cfd91bc21e/");
       const metaplex = new Metaplex(connection)
       .use(walletAdapterIdentity(wallet))
       .use(bundlrStorage());
@@ -287,7 +287,7 @@ export default function Mint() {
       }, { commitment: "finalized" });
 
       console.log(`✅ - Minted Collection NFT: ${collectionNft.address.toString()}`);
-      console.log(`     https://explorer.solana.com/address/${collectionNft.address.toString()}?cluster=devnet`);
+      console.log(`     https://explorer.solana.com/address/${collectionNft.address.toString()}`);
 
       const candyMachineSettings =
         {
@@ -322,14 +322,14 @@ export default function Mint() {
 
 
       console.log(`✅ - Created Candy Machine: ${candyMachine.address.toString()}`);
-      console.log(`     https://explorer.solana.com/address/${candyMachine.address.toString()}?cluster=devnet`);
+      console.log(`     https://explorer.solana.com/address/${candyMachine.address.toString()}`);
 
       const txs = [];
       for (let i = 0; i < 22; i++ ) { // Add 3 NFTs (the size of our collection)
         const items = [];
         for(let j = 0; j < 5; j++){
           items.push({
-              name: `SV SUITCASE ${i*5+j+1}`,
+              name: `SV SUITCASE #${i*5+j+1}`,
               uri: MetadataJSON[i * 5 + j]["Direct Download Link"]
 //              uri : teaser_metadatas[1]
           })
@@ -425,7 +425,7 @@ export default function Mint() {
       }
       diagCtx.showLoading(`Minting ${amount} NFTs to your wallet...`);
 
-      const connection = new Connection(clusterApiUrl('devnet'));
+      const connection = new Connection("https://tiniest-warmhearted-season.solana-mainnet.quiknode.pro/e93197fd4a798a275aef90af5802e6cfd91bc21e/");
       const metaplex = new Metaplex(connection)
       .use(walletAdapterIdentity(wallet))
       .use(bundlrStorage());
@@ -434,7 +434,7 @@ export default function Mint() {
       try {
         candyMachine = await metaplex 
           .candyMachines()
-          .findByAddress({ address: new PublicKey("7tPiBBcanvvVo7xFLQYvThKNuXSuGNiKiRxGT9X4fGQm") });
+          .findByAddress({ address: new PublicKey("D9hwf56eyPCNNXBAG8JSczD66BGW9eVm8EhX92CMZLbo") });
   
           console.log(candyMachine.itemsMinted.toString(10), candyMachine.itemsAvailable.toString(10));
       } catch(e){
@@ -443,41 +443,41 @@ export default function Mint() {
         return;
       }
 
-      try {
-        const provider = new anchor.AnchorProvider(connection, wallet, {});
-        anchor.setProvider(provider);
+      // try {
+      //   const provider = new anchor.AnchorProvider(connection, wallet, {});
+      //   anchor.setProvider(provider);
 
-        const program = new Program(
-            IDL,
-            MUN_PROGRAM_ID,
-            provider
-        );
-        const [configurationPubKey] = await deriveConfigurationAccountPDA(
-            NATIVE_MINT,
-            program.programId
-        );
+      //   const program = new Program(
+      //       IDL,
+      //       MUN_PROGRAM_ID,
+      //       provider
+      //   );
+      //   const [configurationPubKey] = await deriveConfigurationAccountPDA(
+      //       NATIVE_MINT,
+      //       program.programId
+      //   );
 
-        console.log(configurationPubKey.toBase58());
+      //   console.log(configurationPubKey.toBase58());
 
-        const configuration = await program.account.configuration.fetch(
-            configurationPubKey
-        );
+      //   const configuration = await program.account.configuration.fetch(
+      //       configurationPubKey
+      //   );
 
-        if(configuration.mintOn.toNumber() === 0){
-          diagCtx.showWarning("Minting Off from Admin");
-          diagCtx.hideLoading();
-          return;
-        }
-        if(configuration.presaleAmount.toNumber() <= parseInt(candyMachine.itemsMinted.toString(10))){
-          diagCtx.showWarning("Presale Amount Reached. Please wait until Admin start new sale round.");
-          diagCtx.hideLoading();
-          return;
-        }
-      } catch(e){
-          diagCtx.showError(e.message);
-          diagCtx.hideLoading();
-          return;
-      }
+      //   if(configuration.mintOn.toNumber() === 0){
+      //     diagCtx.showWarning("Minting Off from Admin");
+      //     diagCtx.hideLoading();
+      //     return;
+      //   }
+      //   if(configuration.presaleAmount.toNumber() <= parseInt(candyMachine.itemsMinted.toString(10))){
+      //     diagCtx.showWarning("Presale Amount Reached. Please wait until Admin start new sale round.");
+      //     diagCtx.hideLoading();
+      //     return;
+      //   }
+      // } catch(e){
+      //     diagCtx.showError(e.message);
+      //     diagCtx.hideLoading();
+      //     return;
+      // }
 
       if (
         parseInt(candyMachine.itemsMinted.toString(10)) >=
